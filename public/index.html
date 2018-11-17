@@ -5,6 +5,17 @@
     <title>SocketIO</title>
   </head>
   <body>
-    <h1>Welcome to server</h1>
+    <h1>Welcome to Chat App</h1>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      socket.on('connect', (socket) => {
+        console.log("Connected to server");
+      });
+      socket.on('disconnect', (socket) => {
+        console.log('Connection to server lost');
+      })
+    </script>
   </body>
 </html>
