@@ -19,15 +19,23 @@ io.on('connection', (socket) => {
 
   console.log("New User Connected");
   // When User Joins the Chat
-  socket.emit('newMesage', generateMessage('Admin', 'New User Connected'));
-  // Inform Other chat members that user joined
-  socket.broadcast.emit('newMesage', generateMessage('Admin', 'New User Joined the Chat'));
-  // When User Creates Message
-  socket.on('createMessage', (message) => {
-    console.log("Got Message From User: ",JSON.stringify(message, undefined, 2));
 
+  // socket.emit('newMesage', generateMessage('Admin', 'New User Connected'));
+  // Inform Other chat members that user joined
+
+  // socket.broadcast.emit('newMesage', generateMessage('Admin', 'New User Joined the Chat'));
+  // When User Creates Message
+
+  socket.on('createMessage', (message, callback) => {
+    console.log("Got Message From User: ",JSON.stringify(message, undefined, 2));
     // Send the message to everybody in chat except the user who created the message (Broadcast)
-    socket.broadcast.emit('newMessage', generateMessage(message.from, message.text));
+    let userMessage = generateMessage(message.from, message.text);
+    io.emit('newMessage', userMessage);
+    callback(userMessage);
+    // callback({
+    //   serverMessage: 'This is From Server',
+    //   message: userMessage
+    // });
   });
 
   // When user gets disconnected

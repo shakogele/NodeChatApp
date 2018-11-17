@@ -3,9 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>SocketIO</title>
+    <link rel="stylesheet" href="/css/styles.css">
   </head>
   <body>
     <h1>Welcome to Chat App</h1>
+    <div id="chatWindow"></div>
+    <form id="chatId">
+      <div class="form-group">
+        <label for=""></label>
+        <input type="text" id="text" name="text" value="" autocomplete="off" placeholder="Enter Text"/>
+      </div>
+      <button>Send</button>
+    </form>
+    <script src="js/libs/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/socket.js"></script>
   </body>
